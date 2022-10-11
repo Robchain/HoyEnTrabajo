@@ -284,6 +284,7 @@ const Estudiante = () => {
             </Row>
           </ModalBody>
           <ModalFooter>
+          <Button outline> Cancelar </Button>
             { editarMod === false ? <Button color='primary'  onClick={()  =>  { handleAgregar(); dispatch(state  + 2) }}> Agregar</Button>  : <Button color="primary"  onClick={handlEditar}  >Editar</Button>}
           </ModalFooter>
         </Modal>
