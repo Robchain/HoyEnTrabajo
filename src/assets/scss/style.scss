@@ -31,9 +31,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	}
 }
 
-.teste{
-	background-color:blueviolet;
-}
+
 
 .text_color{
 color:#8b8b8c;
@@ -73,4 +71,21 @@ color:#8b8b8c;
 
 .modal .modal-header .btn-close{
 	display: none;
+}
+
+.btn-outline-secondary{
+	border-color: #592a98 !important;
+}
+
+.modal .modal-header{
+	background-color:  #e6dff0 ;
+}
+.form-label{
+	color:#8b8b8c !important;
+}
+.form-control[type=file]{
+	background: #f4f4f4
+}
+.fondoI{
+	background: url('../images/login-BlipBla.png') !important;
 }

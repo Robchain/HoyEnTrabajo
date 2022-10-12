@@ -4,6 +4,7 @@ import { Button, Card, CardTitle, CardBody, CardText, CardImg, Row, Col,  Modal,
 import { subidaIOracion } from "../firebase/config"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Hogar from "../Components/icons/Hogar"
 const SecondPage = () => {
   const MySwal = withReactContent(Swal)
   const [sujeto, setSujeto] = useState(null)
@@ -157,9 +158,15 @@ const [state, dispatch] = useState(0)
   return (
     <div>
     <div>
-    <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={ () => { setFormModal(!formModal); setEditarMod(false) }  }>
+    <Row>
+    <Col  className='p-0 d-flex justify-content-between'>
+      <div  className="d-none d-lg-flex ms-4 "><Hogar/>  <span>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;Oracion</span></div>
+        <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={ () => { setFormModal(!formModal); setEditarMod(false) }  }>
       Agregar
     </Button>
+      </Col>
+    </Row>
+    
     <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered modal-lg '>
     <ModalHeader toggle={() => setFormModal(!formModal)}>Agregar Oracion</ModalHeader>
       <ModalBody>
@@ -242,7 +249,8 @@ const [state, dispatch] = useState(0)
            </Row>
       </ModalBody>
       <ModalFooter>
-        {editarMod  === false ? <Button color='primary'  onClick={handleAgregar}>Agregar</Button> : <Button color="primary" onClick={handlEditar}>Editar</Button>}
+      <Button outline onClick={() => setFormModal(!formModal)}  style={{color:'#592a98'}}> Cancelar </Button>
+        {editarMod  === false ? <Button style={{background:'#5b2998', color:'#fff'}} outline  onClick={handleAgregar}>Agregar</Button> : <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={handlEditar}>Editar</Button>}
       </ModalFooter>
     </Modal>
   </div><br/>

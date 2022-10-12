@@ -4,6 +4,7 @@ import {UncontrolledCarousel, Button, Card, CardTitle, CardBody, CardText, CardI
 import { subidaIRompecabeza } from "../firebase/config"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Hogar from "../Components/icons/Hogar"
 const Rompecabeza = () => {
   const MySwal = withReactContent(Swal)
   const [state, dispatch] = useState(0)
@@ -135,9 +136,14 @@ const Rompecabeza = () => {
   return (
     <div>
     <div>
+    <Row >
+      <Col  className='p-0 d-flex justify-content-between'>
+      <div  className="d-none d-lg-flex ms-4 "><Hogar/>  <span>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;Rompecabeza</span></div>
         <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() => {  setFormModal(!formModal); setEditarMod(false) }  }>
           Agregar
         </Button>
+        </Col>
+        </Row>
         <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered '>
         <ModalHeader toggle={() => setFormModal(!formModal)}>Login Form</ModalHeader>
           <ModalBody>
@@ -187,6 +193,7 @@ const Rompecabeza = () => {
             </div>
           </ModalBody>
           <ModalFooter>
+          <Button outline onClick={() => setFormModal(!formModal)}  style={{color:'#592a98'}}> Cancelar </Button>
             {editarMod  === false ? <Button color='primary' onClick={handleAgregar}> Agregar </Button> : <Button onClick={handlEditar}  color="primary">Editar</Button>}
           </ModalFooter>
         </Modal>

@@ -1,9 +1,10 @@
 import { useEffect, useState} from "react"
-import { Table, DropdownItem, DropdownMenu,  UncontrolledDropdown, DropdownToggle, Modal, Button, ModalHeader, Label, Input, ModalBody, ModalFooter} from 'reactstrap'
+import { Table, DropdownItem, DropdownMenu,  UncontrolledDropdown, DropdownToggle, Modal, Button, ModalHeader, Label, Input, ModalBody, ModalFooter, Row, Col } from 'reactstrap'
 import { Edit, Trash, MoreVertical} from 'react-feather'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Hogar from "../Components/icons/Hogar"
 
 const Categoria = () => {
   const MySwal = withReactContent(Swal)
@@ -96,9 +97,13 @@ setFormValue({...FormValue, [name]:value.toUpperCase()})
   return (
     <div>
      <div>
+     <Row>
+     <Col  className='p-0 d-flex justify-content-between'>
+     <div  className="d-none d-lg-flex ms-4 "><Hogar/>  <span>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;Categoria</span></div>
         <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() => { setFormModal(!formModal); setEditarMod(false) }}>
           Agregar
         </Button>
+        </Col></Row>
         <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered'>
           <ModalHeader toggle={() => setFormModal(!formModal)}  style={{backgroundColor:'#e6dff0'}}><span  style={{color:'#592a98'}}><b>Agregar Categoria</b></span></ModalHeader>
           <ModalBody>
@@ -131,8 +136,9 @@ setFormValue({...FormValue, [name]:value.toUpperCase()})
             </div>
           </ModalBody>
           <ModalFooter>
+          <Button outline onClick={() => setFormModal(!formModal)}  style={{color:'#592a98'}}> Cancelar </Button>
           { 
-            editarMod === false ? <Button color='primary' onClick={handleAgregar}> Agregar</Button> : <Button color="primary" onClick={handlEditar} > Editar</Button>
+            editarMod === false ? <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={handleAgregar}> Agregar</Button> : <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={handlEditar} > Editar</Button>
           }
           </ModalFooter>
         </Modal>

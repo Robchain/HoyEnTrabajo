@@ -5,6 +5,7 @@ import axios from 'axios'
 import {subidaIPerfil} from "../firebase/config"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Hogar from "../Components/icons/Hogar"
 const Estudiante = () => {
   const MySwal = withReactContent(Swal)
   const [state, dispatch] = useState(0) //forzar un actualizacion aun cuando no haya cambios no recomendable
@@ -184,7 +185,7 @@ const Estudiante = () => {
      <div>
      <Row >
       <Col  className='p-0 d-flex justify-content-between'>
-          <span>Estudiante</span>
+      <div  className="d-none d-lg-flex ms-4 "><Hogar/>  <span>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;Estudiante</span></div>
         <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() => {  setFormModal(!formModal); setEditarMod(false) }}>
           Agregar
         </Button>
@@ -284,8 +285,8 @@ const Estudiante = () => {
             </Row>
           </ModalBody>
           <ModalFooter>
-          <Button outline> Cancelar </Button>
-            { editarMod === false ? <Button color='primary'  onClick={()  =>  { handleAgregar(); dispatch(state  + 2) }}> Agregar</Button>  : <Button color="primary"  onClick={handlEditar}  >Editar</Button>}
+          <Button outline onClick={() => setFormModal(!formModal)}  style={{color:'#592a98'}}> Cancelar </Button>
+            { editarMod === false ? <Button style={{background:'#5b2998', color:'#fff'}} outline  onClick={()  =>  { handleAgregar(); dispatch(state  + 2) }}> Agregar</Button>  : <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={handlEditar}  >Editar</Button>}
           </ModalFooter>
         </Modal>
       </div>
@@ -317,13 +318,13 @@ const Estudiante = () => {
       <br/>
     <Table striped >
       <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Email</th>
-          <th>Tipo de Usuario</th>
-          <th>Estado</th>
-          <th>Acciones</th>
+        <tr style={{color:'#592a98'}}>
+          <th style={{ backgroundColor:'#e7dff1'}}>Nombre</th>
+          <th style={{ backgroundColor:'#e7dff1'}}>Apellido</th>
+          <th style={{ backgroundColor:'#e7dff1'}}>Email</th>
+          <th style={{ backgroundColor:'#e7dff1'}}>Tipo de Usuario</th>
+          <th style={{ backgroundColor:'#e7dff1'}}>Estado</th>
+          <th style={{ backgroundColor:'#e7dff1'}}>Acciones</th>
         </tr>
       </thead>
       <tbody>

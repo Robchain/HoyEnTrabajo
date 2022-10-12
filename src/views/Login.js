@@ -49,7 +49,8 @@ const Login = () => {
           sm="12"
           xl='4'
         >
-          <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
+          <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12"  style={{backgroundImage:'../../assets/images/login-BlipBla.png'}}>
+          <div  className="fondoI">
             <CardTitle tag="h2" className="fw-bold mb-1 text_colorT">
              <b>!BIENVENIDOS!</b>
             </CardTitle>
@@ -96,6 +97,7 @@ const Login = () => {
                 <span className="texto_colorB" >Crea una cuenta</span>
               </Link>
             </p>
+            </div>
           </Col>
         </Col>
       </Row>

@@ -4,6 +4,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { subidaIEquipo } from "../firebase/config"
 import withReactContent from 'sweetalert2-react-content'
+import Hogar from '../Components/icons/Hogar'
 const Equipo = () => {
   const MySwal = withReactContent(Swal)
   const [file, setFile] = useState(null)
@@ -118,9 +119,15 @@ const Equipo = () => {
   }
   return (
     <div>
-    <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() => {  setFormModal(!formModal); setEditarMod(false) } }>
-    Agregar
-  </Button>
+    <Row>
+    <Col  className='p-0 d-flex justify-content-between'>
+      <div  className="d-none d-lg-flex ms-4 "><Hogar/>  <span>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;Equipo</span></div>
+      <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() => {  setFormModal(!formModal); setEditarMod(false) } }>
+           Agregar
+        </Button>
+      </Col>
+    </Row>
+   
   <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered '>
         <ModalHeader toggle={() => setFormModal(!formModal)}>Agregar Equipo</ModalHeader>
           <ModalBody>
@@ -151,7 +158,8 @@ const Equipo = () => {
             </div>
           </ModalBody>
           <ModalFooter>
-            {editarMod  === false ? <Button color='primary' onClick={handleAgregar}>Agregar</Button> : <Button onClick={handlEditar} color="primary"> Editar</Button> }
+          <Button outline onClick={() => setFormModal(!formModal)}  style={{color:'#592a98'}}> Cancelar </Button>
+            {editarMod  === false ? <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={handleAgregar}>Agregar</Button> : <Button onClick={handlEditar} outline style={{background:'#5b2998', color:'#fff'}}> Editar</Button> }
           </ModalFooter>
         </Modal>
         <Row className='match-height mb-2'><br/>

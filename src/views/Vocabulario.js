@@ -4,6 +4,7 @@ import { Button, Card, CardTitle, CardBody, CardText, CardImg, Row, Col,  Modal,
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { subidaIVocabulario } from "../firebase/config"
+import Hogar from "../Components/icons/Hogar"
 const Vocabulario = () => {
   const MySwal = withReactContent(Swal)
   const [video, setVideo] = useState(null)
@@ -143,9 +144,15 @@ const handlEditar = async ()  =>  {
   return (
     <div>
     <div>
+    <Row>
+    <Col  className='p-0 d-flex justify-content-between'>
+      <div  className="d-none d-lg-flex ms-4 "><Hogar/>  <span>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;Vocabulario</span></div>
         <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() => {  setFormModal(!formModal); setEditarMod(false) } }>
           Agregar
         </Button>
+      </Col>
+    </Row>
+       
         <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered '>
         <ModalHeader toggle={() => setFormModal(!formModal)}>Login Form</ModalHeader>
           <ModalBody>
@@ -191,8 +198,9 @@ const handlEditar = async ()  =>  {
             </div>
           </ModalBody>
           <ModalFooter>
+          <Button outline onClick={() => setFormModal(!formModal)}  style={{color:'#592a98'}}> Cancelar </Button>
           {  
-            editarMod === false ? <Button style={{background:'#5b2998'}} onClick={handleAgregar} >Agregar</Button> : <Button color="primary" onClick={handlEditar}>  Editar  </Button>
+            editarMod === false ? <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={handleAgregar} >Agregar</Button> : <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={handlEditar}>  Editar  </Button>
            }
           </ModalFooter>
         </Modal>
