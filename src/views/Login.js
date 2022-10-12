@@ -36,11 +36,11 @@ const Login = () => {
 
   return (
     
-    <div className="auth-wrapper auth-cover">
+    <div className="auth-wrapper auth-cover ">
       <Row className="auth-inner">
         <Col className="d-none d-lg-flex justify-content-start" lg="8" sm="12"  xl='8'>
           <div className="d-none d-lg-flex align-self-start justify-content-center ">
-            <img className="img-fluid" src={source} alt="Login Cover" />
+            <img className="img-fluid vh-100" src={source} alt="Login Cover" />
           </div>
         </Col>
         <Col

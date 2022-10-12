@@ -302,17 +302,20 @@ const Estudiante = () => {
             </Col>
             <Col  md='6' sm='12' className='mb-1'>
             <ul>
-              <li><b>Nombre:</b> {detalle.Nombre}</li><br/>
-              <li><b>Apellido: </b>{detalle.Apellido}</li><br/>
-              <li><b>Identificacion:</b> {detalle.Identificacion}</li><br/>
-              <li><b>Correo Electronico:</b> {detalle.Email}  </li><br/>
-              <li><b>Usuario:</b> {detalle.TipoUsuario}</li><br/>
-              <li><b>Tipo de Usuario:</b>  {detalle.TipoUsuario}</li><br/>
-              <li><b>Estado:</b> {detalle.Estado}</li><br/>
+              <li><b  style={{color:'#8cc5b0'}}>Nombre:</b> {detalle.Nombre}</li>
+              <li><b  style={{color:'#8cc5b0'}}>Apellido: </b>{detalle.Apellido}</li>
+              <li><b  style={{color:'#8cc5b0'}}>Identificacion:</b> {detalle.Identificacion}</li>
+              <li><b  style={{color:'#8cc5b0'}}>Correo Electronico:</b> {detalle.Email}  </li>
+              <li><b  style={{color:'#8cc5b0'}}>Usuario:</b> {detalle.TipoUsuario}</li>
+              <li><b  style={{color:'#8cc5b0'}}>Tipo de Usuario:</b>  {detalle.TipoUsuario}</li>
+              <li><b  style={{color:'#8cc5b0'}}>Estado:</b> {detalle.Estado}</li>
             </ul>
             </Col>
             </Row>
           </ModalBody>
+          <ModalFooter>
+          <Button outline onClick={() => setModDetalle(!modDetalle)}  style={{background:'#5b2998', color:'#fff'}} > Cerrar </Button>
+          </ModalFooter>
         </Modal>
       </div>
       <br/>

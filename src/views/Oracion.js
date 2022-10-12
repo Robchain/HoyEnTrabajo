@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import axios from 'axios'
-import { Button, Card, CardTitle, CardBody, CardText, CardImg, Row, Col,  Modal,  ModalHeader, ModalBody, Label, Input, ModalFooter } from 'reactstrap'
+import { Button, Card, CardTitle, CardBody, CardText, CardImg, Row, Col,  Modal,  ModalHeader, ModalBody, Label, Input, ModalFooter, CardFooter } from 'reactstrap'
 import { subidaIOracion } from "../firebase/config"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -168,7 +168,7 @@ const [state, dispatch] = useState(0)
     </Row>
     
     <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered modal-lg '>
-    <ModalHeader toggle={() => setFormModal(!formModal)}>Agregar Oracion</ModalHeader>
+    <ModalHeader toggle={() => setFormModal(!formModal)} style={{backgroundColor:'#e6dff0'}}><span style={{color:'#592a98'}}><b>Agregar Oracion</b></span></ModalHeader>
       <ModalBody>
       <Row>
             <Col md='6' sm='12' className='mb-1'>
@@ -264,18 +264,21 @@ const [state, dispatch] = useState(0)
             <CardTitle tag='h4'>{i.Oracion}</CardTitle>
             <CardText>
             <ul className='list-unstyled'>
-            <li>Verbo: {i.Verbo}</li>
-          <li>Categoria: {i.Categoria}</li>
-          <li>Estado: {i.Estado}</li>
+            <li><span className="fw-bolder" style={{color:'#8cc5b0'}}>Verbo:</span> {i.Verbo}</li>
+          <li><span  className="fw-bolder" style={{color:'#8cc5b0'}}>Categoria:</span> {i.Categoria}</li>
+          <li><span className="fw-bolder" style={{color:'#8cc5b0'}}>Estado:</span> {i.Estado}</li>
               </ul>
             </CardText>
-            <Button color='primary' onClick={() =>  Editar(i)}>
-              Editar
-            </Button>{" "}
-            <Button color='danger'  onClick={() =>  Eliminar(i.Oracion)} >
+          </CardBody>
+          <CardFooter>
+           <Button style={{color:'#592a98'}} outline  onClick={() =>  Eliminar(i.Oracion)} >
               Eliminar
             </Button>
-          </CardBody>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() =>  Editar(i)}>
+              Editar
+            </Button>
+           </CardFooter>
         </Card>
         </Col>
       ))

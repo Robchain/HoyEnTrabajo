@@ -37,10 +37,14 @@ const ThemeNavbar = (props) => {
           </NavItem>
         </ul>
         {/*<NavItem className="d-none d-lg-block">
-          <NavLink className="nav-link-style">
+          <NavLink className="nav-link-style">S
             <ThemeToggler />
           </NavLink>
         </NavItem>*/}
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <div  className="mt-auto">
+        <h2  className="fw-bolder" style={{color:'#5b2998'}}>BlipBla</h2>
+        </div>
       </div>
       <NavbarUser skin={skin} setSkin={setSkin} />
     </Fragment>

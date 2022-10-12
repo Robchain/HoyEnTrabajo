@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import axios from 'axios'
-import { Button, Card, CardTitle, CardBody, CardText, CardImg, Row, Col,  Modal,  ModalHeader, ModalBody, Label, Input, ModalFooter, Form } from 'reactstrap'
+import { Button, Card, CardTitle, CardBody, CardText, CardImg, Row, Col,  Modal,  ModalHeader, ModalBody, Label, Input, ModalFooter, Form, CardFooter } from 'reactstrap'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { subidaIVocabulario } from "../firebase/config"
@@ -146,7 +146,7 @@ const handlEditar = async ()  =>  {
     <div>
     <Row>
     <Col  className='p-0 d-flex justify-content-between'>
-      <div  className="d-none d-lg-flex ms-4 "><Hogar/>  <span>&nbsp;&nbsp;{'>'}&nbsp;&nbsp;Vocabulario</span></div>
+      <div  className="d-none d-lg-flex ms-4 "><Hogar/>  <span>&nbsp;{'>'}&nbsp;Vocabulario</span></div>
         <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() => {  setFormModal(!formModal); setEditarMod(false) } }>
           Agregar
         </Button>
@@ -154,7 +154,7 @@ const handlEditar = async ()  =>  {
     </Row>
        
         <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered '>
-        <ModalHeader toggle={() => setFormModal(!formModal)}>Login Form</ModalHeader>
+        <ModalHeader toggle={() => setFormModal(!formModal)}  style={{backgroundColor:'#e6dff0'}}><span  style={{color:'#592a98'}}><b>Vocabulario</b></span></ModalHeader>
           <ModalBody>
             <div className='mb-2'>
               <Label className='form-label' for='categoria'>Categoria</Label><br/>
@@ -215,18 +215,21 @@ const handlEditar = async ()  =>  {
             <CardTitle tag='h4'>{i.Palabra}</CardTitle>
             <CardText>
             <ul className='list-unstyled' key={i._id}>
-          <li>Categoria: {i.Categoria}</li>
-          <li>Silaba: {i.Silaba}</li>
-          <li>Estado: {i.Estado}</li>
+          <li><span className="fw-bolder" style={{color:'#8cc5b0'}}>Categoria:</span> {i.Categoria}</li>
+          <li><span className="fw-bolder" style={{color:'#8cc5b0'}}>Silaba:</span> {i.Silaba}</li>
+          <li><span className="fw-bolder" style={{color:'#8cc5b0'}}>Estado:</span> {i.Estado}</li>
               </ul>
             </CardText>
-            <Button color='primary' onClick={() =>  Editar(i)}>
-              Editar
-            </Button>{" "}
-            <Button color='danger' onClick={()  =>  Eliminar(i.Palabra)}>
+          </CardBody>
+          <CardFooter>
+            <Button style={{color:'#592a98'}} outline onClick={()  =>  Eliminar(i.Palabra)}>
               Eliminar
             </Button>
-          </CardBody>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() =>  Editar(i)}>
+              Editar
+            </Button>
+          </CardFooter>
         </Card>
         </Col>
       ))

@@ -55,12 +55,12 @@ const VerticalMenuHeader = (props) => {
     <div className="navbar-header">
       <ul className="nav navbar-nav flex-row">
         <li className="nav-item me-auto">
-          <NavLink
+          <NavLink  
             to={user ? getHomeRouteForLoggedInUser(user.role) : "/"}
             className="navbar-brand" /* aqui edite el logo */
           >
             <span className="brand-logo">
-              <img src={themeConfig.app.appLogoImage} alt="logo" />
+              <img src={themeConfig.app.appLogoImage} alt="logo"  className="vw-100"/>
             </span>
           </NavLink>
         </li>

@@ -1,5 +1,5 @@
 import {useState, useEffect} from  'react'
-import { Button, Modal, ModalHeader, ModalBody, CardImg, ModalFooter, Input, Label, Row, Col, Card, CardBody, CardText, CardTitle } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, CardImg, ModalFooter, Input, Label, Row, Col, Card, CardBody, CardText, CardTitle, CardFooter } from 'reactstrap'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { subidaIEquipo } from "../firebase/config"
@@ -129,7 +129,7 @@ const Equipo = () => {
     </Row>
    
   <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered '>
-        <ModalHeader toggle={() => setFormModal(!formModal)}>Agregar Equipo</ModalHeader>
+        <ModalHeader toggle={() => setFormModal(!formModal)} style={{backgroundColor:'#e6dff0'}}> <span style={{color:'#592a98'}} ><b>Agregar Equipo</b></span></ModalHeader>
           <ModalBody>
           <div className='mb-2'>
               <Label className='form-label' for='Nombre'>Nombre</Label>
@@ -173,16 +173,19 @@ const Equipo = () => {
             <CardTitle tag='h4'>{i.Nombre}</CardTitle>
             <CardText>
             <ul className='list-unstyled'>
-          <li> Nombre: {i.Nombre}</li>
-          <li>Estado: {i.Estado}</li>
+          <li> <span  className="fw-bolder" style={{color:'#8cc5b0'}}>Nombre:</span> {i.Nombre}</li>
+          <li> <span  className="fw-bolder" style={{color:'#8cc5b0'}}>Estado:</span> {i.Estado}</li>
             </ul>
             </CardText>
-            <Button color='primary' onClick={() => Editar(i)} >
-              Editar
-            </Button>{" "}
-            <Button color='danger' onClick={()  =>  Eliminar(i.Nombre)}>
+            <CardFooter>
+            <Button style={{color:'#592a98'}} outline onClick={()  =>  Eliminar(i.Nombre)}>
               Eliminar
             </Button>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <Button style={{background:'#5b2998', color:'#fff'}} outline onClick={() => Editar(i)} >
+              Editar
+            </Button>
+            </CardFooter>
           </CardBody>
         </Card>
         </Col>

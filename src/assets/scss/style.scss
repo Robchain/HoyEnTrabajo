@@ -14,7 +14,6 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	display: flex;
 	justify-content: center;
 	.son{
-		
 		max-width: 420px;
 		margin: 5px;
 	}
@@ -25,9 +24,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	justify-content: center;
 	.son{
 		max-width: 420px;
-		margin: 5px;
-		
-	
+		margin: 5px;	
 	}
 }
 
@@ -88,4 +85,21 @@ color:#8b8b8c;
 }
 .fondoI{
 	background: url('../images/login-BlipBla.png') !important;
+}
+
+.main-menu.menu-light .navigation li a{
+	color:#777 !important;
+
+}
+
+.vertical-layout .main-menu .navigation a.active{
+	color:#fff !important; 
+	background-color: #8cc5b0;
+	border-radius: 50px;
+	box-shadow: 0 0 10px 1px #8cc5b0;
+}
+
+.dropdown-item:hover{
+	color:#fff	!important;
+	background-color: #4faf8b	!important;
 }
