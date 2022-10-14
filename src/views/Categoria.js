@@ -132,7 +132,7 @@ setFormValue({...FormValue, [name]:value.toUpperCase()})
             checked={FormValue.Estado === "INACTIVO"}
             onChange={editarMod  === false ? handlechange : handlerFalse}
         />
-        <Label for='Inactivo'>Inactivo </Label>
+        <Label for='Inactivo'>Inactivo</Label>
             </div>
           </ModalBody>
           <ModalFooter>
