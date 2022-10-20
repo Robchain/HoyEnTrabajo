@@ -45,6 +45,7 @@ const Estudiante = () => {
 }
   useEffect(() => {
       axios.get('http://localhost:3002/api/auth/verRegistrados').then(response =>  { setTabla(response.data); setDetalle(response.data) })
+      console.log(tabla)
   }, [state])
   const handleAgregar =  ()  =>  {
     const postUsuario = async ()  =>  {

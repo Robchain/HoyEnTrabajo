@@ -1,5 +1,9 @@
 import { Row, Button, Col } from "reactstrap"
-import Hogar from "../Components/icons/Hogar"
+import Hogar from "../../Components/icons/Hogar"
+// ** Demo Components
+import WizardHorizontal from './WizardHorizontal'
+// ** Custom Components
+//import BreadCrumbs from '@components/breadcrumbs'
 const ActividadCo = () => {
   return (
     <div>
@@ -11,6 +15,12 @@ const ActividadCo = () => {
         </Button>
       </Col>
     </Row>
+   {/* <BreadCrumbs title='Form Wizard' data={[{ title: 'Form' }, { title: 'Form Wizard' }]} />*/}
+      <Row>
+        <Col>
+          <WizardHorizontal />
+        </Col>
+      </Row>
     </div>
   )
 }
