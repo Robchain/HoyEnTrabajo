@@ -44,7 +44,7 @@ const Estudiante = () => {
     setFormValue({...FormValue,    [name]:value.toUpperCase()})     
 }
   useEffect(() => {
-      axios.get('http://localhost:3002/api/auth/verRegistrados').then(response =>  { setTabla(response.data); setDetalle(response.data) })
+      axios.get('http://localhost:3002/api/auth/Ver-Registrados-Activos').then(response =>  { setTabla(response.data); setDetalle(response.data) })
   }, [state])
   const handleAgregar =  ()  =>  {
     const postUsuario = async ()  =>  {

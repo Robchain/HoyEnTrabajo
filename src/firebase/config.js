@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app"
-import { getStorage, ref, uploadBytes, getDownloadURL/*, getMetadata*/ } from "firebase/storage"
+import { getStorage, ref, uploadBytes, getDownloadURL /*uploadBytesResumable getMetadata*/ } from "firebase/storage"
+import { Modal, ModalBody } from "reactstrap"
+
 //import {v4} from 'uuid'
 
 const firebaseConfig = {
@@ -57,3 +59,18 @@ export  const subidaIEquipo =   async  file  =>  {
   const url   = await getDownloadURL(storageRef)
   return  url
 }
+/*export  const Test =   async  file  =>  {    
+  const storageRef = ref(storage, `test/${file.name}`)
+   const data =  uploadBytesResumable(storageRef, file)
+  data.on('state_changed', (snapshot) => { 
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+},(error)=>{
+    console.log('handle error of uploading')
+},()=>{
+   getDownloadURL(storageRef)
+})
+  
+})*/
+///////
+// Upload file and metadata to the object 'images/mountains.jpg'
+// Listen for state changes, errors, and completion of the upload.

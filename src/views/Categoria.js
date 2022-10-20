@@ -25,9 +25,7 @@ const Categoria = () => {
   })
   const handlechange  =   (event)  => { // manejo de cambios en el formulario de agregar
     const {name, value} =  event.target
-
 setFormValue({...FormValue, [name]:value.toUpperCase()})
-
 }
   useEffect(() => { // useefect que se ejecutara al arrancar el componente 
       axios.get('http://localhost:3002/api/auth/Categoria/mostrartodo').then(response =>  setTabla(response.data))

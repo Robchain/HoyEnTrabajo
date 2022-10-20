@@ -32,16 +32,17 @@ const Equipo = () => {
     
     }, [state])
 
+
   const handleAgregar = ()  =>  {
     const postCategoria    =   async ()    => {
       try {
-        const data = await subidaIEquipo(file)
-      await axios({
+        const datas = await subidaIEquipo(file)
+           axios({
               url:"http://localhost:3002/api/auth/Equipo",
               method:'POST',
               data: {
                 Nombre:FormValue.Nombre,
-                Imagen:data,
+                Imagen:datas,
                 Estado:FormValue.Estado
               }
           }).then(respuesta  => { 
