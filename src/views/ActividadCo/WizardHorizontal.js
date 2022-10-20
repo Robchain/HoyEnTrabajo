@@ -16,9 +16,12 @@ import { FileText, User, MapPin, Link } from 'react-feather'
 const WizardModern = () => {
   // ** Ref
   const ref = useRef(null)
-
+  const [primero, setPrimero] = useState({})
+  const [segundo, setSegundo] = useState({})
+  const [tercero, setTercero] = useState({})
   // ** State
   const [stepper, setStepper] = useState(null)
+
 
   const steps = [
     {
@@ -26,28 +29,28 @@ const WizardModern = () => {
       title: 'Armar Grupos',
       subtitle: '',
       icon: <FileText size={18} />,
-      content: <AccountDetails stepper={stepper} type='wizard-modern' />
+      content: <AccountDetails stepper={stepper} type='wizard-modern' setPrimero={setPrimero} />
     },
     {
       id: 'seleccion-participante',
       title: 'Seleccion de los Participantes',
       subtitle: '',
       icon: <User size={18} />,
-      content: <PersonalInfo stepper={stepper} type='wizard-modern' />
+      content: <PersonalInfo stepper={stepper} type='wizard-modern' setSegundo={setSegundo} />
     },
     {
       id: 'step-address',
-      title: 'Address',
+      title: 'Fechas',
       subtitle: '',
       icon: <MapPin size={18} />,
-      content: <Address stepper={stepper} type='wizard-modern' />
+      content: <Address stepper={stepper} type='wizard-modern' setTercero={setTercero}/>
     },
     {
       id: 'social-links',
-      title: 'Social Links',
+      title: 'Confirmacion ',
       subtitle: 'Add Social Links',
       icon: <Link size={18} />,
-      content: <SocialLinks stepper={stepper} type='wizard-modern' />
+      content: <SocialLinks stepper={stepper} type='wizard-modern' primero={primero} segundo={segundo} tercero={tercero}/>
     }
   ]
 

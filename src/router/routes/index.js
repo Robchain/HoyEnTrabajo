@@ -99,8 +99,8 @@ const Routes = [
     element: <Equipo />
   },
   {
-    path: "/ActividadCo",
-    element: <ActividadCo />
+    path: "/ActividadGrupal",
+    element: <ActividadCo/>
   },
   {
     path: "/ReporteEstudiante",

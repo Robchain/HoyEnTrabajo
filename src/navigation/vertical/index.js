@@ -38,10 +38,10 @@ export default [
     navLink:"/Equipo"
   },
   {
-    id:"ActividadCo",
+    id:"ActividadGrupal",
     title:"Actividades",
     icon:<Layers  size={20}/>,
-    navLink:"/ActividadCo"
+    navLink:"/ActividadGrupal"
   },
   {
     id:"ReporteEstudiante",
