@@ -179,7 +179,7 @@ const [state, dispatch] = useState(0)
             </Col>
             <Col md='6' sm='12' className='mb-1'>
             <Label className='form-label' for='FileVideoPreguntaQuien'>
-              Video Pregunta "Quien"
+              Video Pregunta "Adverbio"
             </Label>
             <Input type='file' id='FileVideoPreguntaQuien' name='FileVideoPreguntaQuien'  onChange={e => setAskQue(e.target.files[0])} />
             </Col>
@@ -191,13 +191,13 @@ const [state, dispatch] = useState(0)
             </Col>
             <Col md='6' sm='12' className='mb-1'>
               <Label className='form-label' for='FileVideoPreguntaComplemento'>
-                Video Pregunta Complemento
+                Video Pregunta "Que"
               </Label>
               <Input type='file' id='inputFile' name='FileVideoPreguntaComplemento' onChange={e => setAskComplemento(e.target.files[0]) } />
             </Col>
             <Col md='6' sm='12' className='mb-1'>
               <Label className='form-label' for='FileSujetoImagen'>
-                Imagen del Sujeto
+                Imagen del Sujeto 'el quien'
               </Label>
               <Input type='file' id='FileSujetoImagen' name='FileSujetoImagen' onChange={e  => setSujeto(e.target.files[0])}/>
             </Col>
@@ -209,19 +209,25 @@ const [state, dispatch] = useState(0)
             </Col>
             <Col md='6' sm='12' className='mb-1'>
               <Label className='form-label' for='cityMulti'>
-                Verbo
+                Verbo 'imagen quemada'
               </Label>
               <Input type='text' name='Verbo' id='cityMulti' placeholder='Verbo' onChange={editarMod  === false  ? handlechange : handlerFalse} value={editarMod  === false ? FormValue.Verbo  : selecionado.Verbo } />
             </Col>  
             <Col md='6' sm='12' className='mb-1'>
             <Label className='form-label' for='FileVideoMuestra'>
-              Video Muestra
+              Video Muestra 
+            </Label>
+            <Input type='file' id='FileVideoMuestra' name='FileVideoMuestra' onChange={e  => setMuestra(e.target.files[0])}/>
+            </Col>
+            <Col md='6' sm='12' className='mb-1'>
+            <Label className='form-label' for='FileVideoMuestra'>
+              Video Quien
             </Label>
             <Input type='file' id='FileVideoMuestra' name='FileVideoMuestra' onChange={e  => setMuestra(e.target.files[0])}/>
             </Col>
             <Col md='6' sm='12' className='mb-1'>
             <Label className='form-label' for='FileAdjetivoImagen'>
-              Imagen del Adjetivo
+              Imagen del Adverbio
             </Label>
             <Input type='file' id='FileAdjetivoImagen' name='FileAdjetivoImagen' onChange={e  => setAdjetivo(e.target.files[0])}/>
           </Col>

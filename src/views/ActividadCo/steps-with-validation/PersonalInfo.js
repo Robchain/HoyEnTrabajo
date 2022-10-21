@@ -1,11 +1,11 @@
 // ** React Imports
-import { Fragment } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 
 // ** Third Party Components
 import Select from 'react-select'
 import { useForm, Controller } from 'react-hook-form'
 import { ArrowLeft, ArrowRight } from 'react-feather'
-
+import { ListaAlumnos } from '../../../API/Estudiantes'
 // ** Utils
 import { selectThemeColors } from '@utils'
 
@@ -17,11 +17,22 @@ import '@styles/react/libs/react-select/_react-select.scss'
 
 const defaultValues = {
   lastName: '',
-  firstName: ''
+  firstName: '',
+  country:'',
+  language:''
 }
 
 const PersonalInfo = ({ stepper, setSegundo }) => {
   // ** Hooks
+const [listadoI, setlistadoI] = useState([])
+  const listadoInicial =  async () => {
+    const data = await ListaAlumnos()
+    setlistadoI(data)
+  }
+  useEffect(() => {
+    listadoInicial()
+  }, [])
+  
   const {
     control,
     setError,
@@ -45,93 +56,88 @@ const PersonalInfo = ({ stepper, setSegundo }) => {
     }
   }
 
-  const countryOptions = [
-    { value: 'UK', label: 'UK' },
-    { value: 'USA', label: 'USA' },
-    { value: 'Spain', label: 'Spain' },
-    { value: 'France', label: 'France' },
-    { value: 'Italy', label: 'Italy' },
-    { value: 'Australia', label: 'Australia' }
-  ]
-
-  const languageOptions = [
-    { value: 'English', label: 'English' },
-    { value: 'French', label: 'French' },
-    { value: 'Spanish', label: 'Spanish' },
-    { value: 'Italian', label: 'Italian' },
-    { value: 'Japanese', label: 'Japanese' }
-  ]
 
   return (
     <Fragment>
       <div className='content-header'>
-        <h5 className='mb-0'>Personal Info</h5>
-        <small>Enter Your Personal Info.</small>
+        <h5 className='mb-0'>Seleccion de los participantes</h5>
+        <small>Especifique el numero de los integrantes</small>
       </div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Row>
           <Col md='6' className='mb-1'>
             <Label className='form-label' for='firstName'>
-              First Name
+             Grupo 1
             </Label>
-            <Controller
-              id='firstName'
-              name='firstName'
-              control={control}
-              render={({ field }) => <Input placeholder='John' invalid={errors.firstName && true} {...field} />}
-            />
-            {errors.firstName && <FormFeedback>{errors.firstName.message}</FormFeedback>}
-          </Col>
-          <Col md='6' className='mb-1'>
-            <Label className='form-label' for='lastName'>
-              Last Name
-            </Label>
-            <Controller
-              id='lastName'
-              name='lastName'
-              control={control}
-              render={({ field }) => <Input placeholder='Doe' invalid={errors.lastName && true} {...field} />}
-            />
-            {errors.lastName && <FormFeedback>{errors.lastName.message}</FormFeedback>}
-          </Col>
-        </Row>
-        <Row>
-          <Col md='6' className='mb-1'>
-            <Label className='form-label' for='country'>
-              Country
-            </Label>
-            <Select
-              theme={selectThemeColors}
-              isClearable={false}
-              id={`country`}
-              className='react-select'
-              classNamePrefix='select'
-              options={countryOptions}
-              defaultValue={countryOptions[0]}
-            />
+
           </Col>
           <Col md='6' className='mb-1'>
             <Label className='form-label' for='language'>
-              Language
+             Listado Estudiantes
             </Label>
-            <Select
+            <Controller
+              id='language'
+              name='language'
+              control={control}
+              render={({ field }) => <Select
               isMulti
               isClearable={false}
               theme={selectThemeColors}
               id={`language`}
-              options={languageOptions}
+              options={listadoI.map(i => { 
+                return {
+                        label: i.Nombre,
+                        value: i._id }
+                      })}
               className='react-select'
               classNamePrefix='select'
+              name='paisdos'
+              {...field}
+            />}
             />
+            {errors.language && <FormFeedback>{errors.language.message}</FormFeedback>}
+          </Col>
+        </Row>
+        <Row>
+        <Col md='6' className='mb-1'>
+            <Label className='form-label' for='firstName'>
+              Grupo 2
+            </Label>
+          </Col>
+          <Col md='6' className='mb-1'>
+            <Label className='form-label' for='language2'>
+             Listado Estudiantes
+            </Label>
+            <Controller
+              id='language2'
+              name='language2'
+              control={control}
+              render={({ field }) => <Select
+              isMulti
+              isClearable={false}
+              theme={selectThemeColors}
+              id={`language2`}
+              options={listadoI.map(i => { 
+                return {
+                        label: i.Nombre,
+                        value: i._id }
+                      })}
+              className='react-select'
+              classNamePrefix='select'
+              name='paisdos'
+              {...field}
+            />}
+            />
+            {errors.language && <FormFeedback>{errors.language.message}</FormFeedback>}
           </Col>
         </Row>
         <div className='d-flex justify-content-between'>
           <Button type='button' color='primary' className='btn-prev' onClick={() => stepper.previous()}>
             <ArrowLeft size={14} className='align-middle me-sm-25 me-0'></ArrowLeft>
-            <span className='align-middle d-sm-inline-block d-none'>Anterior</span>
+            <span className='align-middle d-sm-inline-block d-none'>Previous</span>
           </Button>
           <Button type='submit' color='primary' className='btn-next'>
-            <span className='align-middle d-sm-inline-block d-none'>Siguiente</span>
+            <span className='align-middle d-sm-inline-block d-none'>Next</span>
             <ArrowRight size={14} className='align-middle ms-sm-25 ms-0'></ArrowRight>
           </Button>
         </div>

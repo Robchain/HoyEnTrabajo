@@ -11,7 +11,7 @@ import PersonalInfo from './steps-with-validation/PersonalInfo'
 import AccountDetails from './steps-with-validation/AccountDetails'
 
 // ** Icons Imports
-import { FileText, User, MapPin, Link } from 'react-feather'
+import { FileText, User, Calendar, CheckCircle } from 'react-feather'
 
 const WizardModern = () => {
   // ** Ref
@@ -29,28 +29,28 @@ const WizardModern = () => {
       title: 'Armar Grupos',
       subtitle: '',
       icon: <FileText size={18} />,
-      content: <AccountDetails stepper={stepper} type='wizard-modern' setPrimero={setPrimero} />
+      content: <AccountDetails stepper={stepper}  setPrimero={setPrimero} />
     },
     {
       id: 'seleccion-participante',
       title: 'Seleccion de los Participantes',
       subtitle: '',
       icon: <User size={18} />,
-      content: <PersonalInfo stepper={stepper} type='wizard-modern' setSegundo={setSegundo} />
+      content: <PersonalInfo stepper={stepper}  setSegundo={setSegundo} />
     },
     {
       id: 'step-address',
       title: 'Fechas',
       subtitle: '',
-      icon: <MapPin size={18} />,
-      content: <Address stepper={stepper} type='wizard-modern' setTercero={setTercero}/>
+      icon: <Calendar size={18} />,
+      content: <Address stepper={stepper}  setTercero={setTercero}/>
     },
     {
       id: 'social-links',
       title: 'Confirmacion ',
-      subtitle: 'Add Social Links',
-      icon: <Link size={18} />,
-      content: <SocialLinks stepper={stepper} type='wizard-modern' primero={primero} segundo={segundo} tercero={tercero}/>
+      subtitle: '',
+      icon: <CheckCircle size={18} />, 
+      content: <SocialLinks stepper={stepper} primero={primero} segundo={segundo} tercero={tercero}/>
     }
   ]
 
