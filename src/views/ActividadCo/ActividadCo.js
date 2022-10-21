@@ -17,6 +17,7 @@ const ActividadCo = () => {
         <Col>
           <WizardHorizontal />
         </Col>
+        
       </Row>
     </div>
   )
