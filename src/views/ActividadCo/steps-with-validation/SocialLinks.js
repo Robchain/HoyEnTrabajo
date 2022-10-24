@@ -15,14 +15,12 @@ const defaultValues = {
   linkedin: ''
 }
 
-const SocialLinks = ({ stepper }) => {
+const SocialLinks = ({ stepper, primero }) => {
   // ** Hooks
   const {
-    
     handleSubmit,
     formState: {  }
   } = useForm({ defaultValues })
-
   const onSubmit = data => {
     if (Object.values(data).every(field => field.length > 0)) {
       alert('submitted')
@@ -53,7 +51,7 @@ const SocialLinks = ({ stepper }) => {
            
           </Col>
           <Col md='6' className='mb-1'>
-            
+          {JSON.stringify(primero)}
           </Col>
         </Row>
         <Row>

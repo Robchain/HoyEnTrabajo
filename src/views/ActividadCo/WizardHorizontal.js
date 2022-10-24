@@ -16,9 +16,9 @@ import { FileText, User, Calendar, CheckCircle } from 'react-feather'
 const WizardModern = () => {
   // ** Ref
   const ref = useRef(null)
-  const [primero, setPrimero] = useState({})
-  const [segundo, setSegundo] = useState({})
-  const [tercero, setTercero] = useState({})
+  const [primero, setPrimero] = useState([])
+  const [segundo, setSegundo] = useState([])
+  const [tercero, setTercero] = useState([])
   // ** State
   const [stepper, setStepper] = useState(null)
 
@@ -36,7 +36,7 @@ const WizardModern = () => {
       title: 'Seleccion de los Participantes',
       subtitle: '',
       icon: <User size={18} />,
-      content: <PersonalInfo stepper={stepper}  setSegundo={setSegundo} />
+      content: <PersonalInfo stepper={stepper}  setSegundo={setSegundo} primero={primero} />
     },
     {
       id: 'step-address',

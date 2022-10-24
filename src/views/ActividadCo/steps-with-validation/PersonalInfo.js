@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight } from 'react-feather'
 import { ListaAlumnos } from '../../../API/Estudiantes'
 // ** Utils
 import { selectThemeColors } from '@utils'
-
+import Repeater from '@components/repeater'
 // ** Reactstrap Imports
 import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
 
@@ -16,74 +16,60 @@ import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
 import '@styles/react/libs/react-select/_react-select.scss'
 
 const defaultValues = {
-  lastName: '',
-  firstName: '',
-  country:'',
-  language:''
+ DGrupo:''
 }
 
-const PersonalInfo = ({ stepper, setSegundo }) => {
+const PersonalInfo = ({ stepper, setSegundo, primero }) => {
   // ** Hooks
+
 const [listadoI, setlistadoI] = useState([])
   const listadoInicial =  async () => {
     const data = await ListaAlumnos()
     setlistadoI(data)
+
+  }
+  const formulario = () => {
+    
   }
   useEffect(() => {
+  
     listadoInicial()
   }, [])
-  
+useEffect(() => {
+  formulario()
+}, [])
+
   const {
     control,
-    setError,
-    handleSubmit,
-    formState: { errors }
+    handleSubmit   
   } = useForm({ defaultValues })
-
-  const onSubmit = data => {
-    if (Object.values(data).every(field => field.length > 0)) {
-      stepper.next()
-      setSegundo(data)
-    } else {
-      for (const key in data) {
-        if (data[key].length === 0) {
-          setError(key, {
-            type: 'manual',
-            message: `Please enter a valid ${key}`
-          })
-        }
-      }
-    }
-  }
-
-
   return (
     <Fragment>
       <div className='content-header'>
         <h5 className='mb-0'>Seleccion de los participantes</h5>
         <small>Especifique el numero de los integrantes</small>
       </div>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Row>
-          <Col md='6' className='mb-1'>
+      <Form onSubmit={handleSubmit((data) => { setSegundo([data]); stepper.next() })}>
+        <Repeater count={ primero.map(i  => { return Number(i.grupos.value) })}>
+        {i => (
+          <Row><Col md='6' className='mb-1'>
             <Label className='form-label' for='firstName'>
-             Grupo 1
+             Grupo {i + 1}
             </Label>
 
           </Col>
-          <Col md='6' className='mb-1'>
-            <Label className='form-label' for='language'>
+         
+            <Label className='form-label' for={`dati${i}`}>
              Listado Estudiantes
             </Label>
             <Controller
-              id='language'
-              name='language'
+              name={`dati${i}`}
               control={control}
-              render={({ field }) => <Select
+              render={({ field: {onChange, value, ...rest} }) => <Select
               isMulti
               isClearable={false}
               theme={selectThemeColors}
-              id={`language`}
+              id={`dati${i}`}
               options={listadoI.map(i => { 
                 return {
                         label: i.Nombre,
@@ -91,46 +77,16 @@ const [listadoI, setlistadoI] = useState([])
                       })}
               className='react-select'
               classNamePrefix='select'
-              name='paisdos'
-              {...field}
+              onChange={onChange}
+              defaultValue={value}
+              {...rest}
             />}
             />
-            {errors.language && <FormFeedback>{errors.language.message}</FormFeedback>}
-          </Col>
-        </Row>
-        <Row>
-        <Col md='6' className='mb-1'>
-            <Label className='form-label' for='firstName'>
-              Grupo 2
-            </Label>
-          </Col>
-          <Col md='6' className='mb-1'>
-            <Label className='form-label' for='language2'>
-             Listado Estudiantes
-            </Label>
-            <Controller
-              id='language2'
-              name='language2'
-              control={control}
-              render={({ field }) => <Select
-              isMulti
-              isClearable={false}
-              theme={selectThemeColors}
-              id={`language2`}
-              options={listadoI.map(i => { 
-                return {
-                        label: i.Nombre,
-                        value: i._id }
-                      })}
-              className='react-select'
-              classNamePrefix='select'
-              name='paisdos'
-              {...field}
-            />}
-            />
-            {errors.language && <FormFeedback>{errors.language.message}</FormFeedback>}
-          </Col>
-        </Row>
+          </Row>
+        )}
+        
+      </Repeater>
+        
         <div className='d-flex justify-content-between'>
           <Button type='button' color='primary' className='btn-prev' onClick={() => stepper.previous()}>
             <ArrowLeft size={14} className='align-middle me-sm-25 me-0'></ArrowLeft>

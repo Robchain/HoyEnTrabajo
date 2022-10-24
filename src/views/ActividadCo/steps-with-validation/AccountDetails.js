@@ -6,10 +6,10 @@ import { selectThemeColors } from '@utils'
 
 import { todosTeam } from '../../../API/Team'
 // ** Third Party Components
-import * as yup from 'yup'
-import { useForm } from 'react-hook-form'
+//import * as yup from 'yup'
+import { useForm, Controller } from 'react-hook-form'
 import { ArrowLeft, ArrowRight } from 'react-feather'
-import { yupResolver } from '@hookform/resolvers/yup'
+//import { yupResolver } from '@hookform/resolvers/yup'
 import Select from 'react-select'
 import '@styles/react/libs/react-select/_react-select.scss'
 
@@ -17,13 +17,14 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import { Form, Label, Row, Col, Button, FormFeedback } from 'reactstrap'
 
 const defaultValues = {
-  country:'',
-language:''
+  grupos:'',
+  equipos:''
 }
 
 const AccountDetails = ({ stepper, setPrimero}) => {
   const [tarjetas, setTarjetas] = useState([])
-
+   
+    
 const llenadoInicial = async () => {
   const datu = await todosTeam()
   setTarjetas(datu)
@@ -32,34 +33,15 @@ const llenadoInicial = async () => {
 useEffect(() => {
   llenadoInicial()
 }, [])
-
-  const SignupSchema = yup.object().shape({
-    username: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup.string().required(),
-    confirmPassword: yup
-      .string()
-      .required()
-      .oneOf([yup.ref(`password`), null], 'Passwords must match')
-  })
-
   // ** Hooks
-
   const {
     handleSubmit,
-    formState: { errors }
+    control
   } = useForm({
-    defaultValues,
-    resolver: yupResolver(SignupSchema)
+    defaultValues
   })
 
-  const onSubmit = (data) => {
-      if (isObjEmpty(errors)) {
-        stepper.next()
-        setPrimero(data)
-      console.log('ad', data)
-      }
-  }
+ 
   const Options = [
     { value: '2', label: '2' },
     { value: '3', label: '3' },
@@ -73,44 +55,56 @@ useEffect(() => {
         <h5 className='mb-0'>Armar Grupos</h5>
         <small className='text-muted'>Especificar el nombre de los integrantes</small>
       </div>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit((data) => { setPrimero([data]); stepper.next() })}>
         <Row>
           <Col md='6' className='mb-1'>
-          <Label className='form-label' for='country'>
+          <Label className='form-label' for='grupos'>
               Numero de Grupos
             </Label>
-            <Select
+            <Controller
+            name='grupos'
+            control={control}
+            render={ ({field: {onChange, value, ...rest} })  => <Select
               theme={selectThemeColors}
               isClearable={false}
-              id={`country`}
+              id={`grupos`}
               className='react-select'
               classNamePrefix='select2'
               options={Options}
-              defaultValue={Options[0]}
+              onChange={onChange}
+              defaultValue={value}
+              {...rest}
+            />}
             />
+            
           </Col>
           <Col md='6' className='mb-1'>
-          <Label className='form-label' for='language'>
-             Nombres de Equipos 
+          <Label className='form-label' for='equipos'>
+             Nombres de Equipos
             </Label>
-            <Select
+            <Controller
+            name='equipos'
+            control={control}
+            render={ ({field: {onChange, value, ...rest} })  => <Select
               isMulti
               isClearable={false}
               theme={selectThemeColors}
-              id={`language`}
+              id={`equipos`}
+              className='react-select'
+              classNamePrefix='select'
               options={tarjetas.map(i => { 
                 return {
                         label: i.Nombre,
                         value: i._id }
                       })}
-              className='react-select'
-              classNamePrefix='select'
-              
-            />
-            {errors.email && <FormFeedback>{errors.email.message}</FormFeedback>}
+              onChange={onChange}
+              defaultValue={value}
+              {...rest}
+            />}
+    />
+            
           </Col>
         </Row>
-        
         <div className='d-flex justify-content-between'>
           <Button color='secondary' className='btn-prev' outline disabled>
             <ArrowLeft size={14} className='align-middle me-sm-25 me-0'></ArrowLeft>
