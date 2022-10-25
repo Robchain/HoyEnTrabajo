@@ -15,21 +15,16 @@ import '@styles/react/libs/react-select/_react-select.scss'
 
 // ** Reactstrap Imports
 import { Form, Label, Row, Col, Button, FormFeedback } from 'reactstrap'
-
 const defaultValues = {
-  grupos:'',
-  equipos:''
+  grupos: '',
+  equipos:[]
 }
-
 const AccountDetails = ({ stepper, setPrimero}) => {
   const [tarjetas, setTarjetas] = useState([])
-   
-    
 const llenadoInicial = async () => {
   const datu = await todosTeam()
   setTarjetas(datu)
 } 
-
 useEffect(() => {
   llenadoInicial()
 }, [])
@@ -40,8 +35,6 @@ useEffect(() => {
   } = useForm({
     defaultValues
   })
-
- 
   const Options = [
     { value: '2', label: '2' },
     { value: '3', label: '3' },
@@ -55,7 +48,7 @@ useEffect(() => {
         <h5 className='mb-0'>Armar Grupos</h5>
         <small className='text-muted'>Especificar el nombre de los integrantes</small>
       </div>
-      <Form onSubmit={handleSubmit((data) => { setPrimero([data]); stepper.next() })}>
+      <Form onSubmit={handleSubmit((data) => { setPrimero(data); stepper.next() })}>
         <Row>
           <Col md='6' className='mb-1'>
           <Label className='form-label' for='grupos'>
@@ -76,7 +69,6 @@ useEffect(() => {
               {...rest}
             />}
             />
-            
           </Col>
           <Col md='6' className='mb-1'>
           <Label className='form-label' for='equipos'>

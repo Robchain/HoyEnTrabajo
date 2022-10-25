@@ -22,7 +22,7 @@ const PickerRange = () => {
         onChange={date => setPicker(date)}
         options={{
           mode: 'range',
-          defaultDate: ['2022-10-21', '2022-12-21']
+          defaultDate: ['2022-11-30', '2022-10-21']
         }}
       />
     </Fragment>

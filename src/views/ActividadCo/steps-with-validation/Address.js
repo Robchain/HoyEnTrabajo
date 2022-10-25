@@ -1,59 +1,53 @@
 // ** React Imports
 import { Fragment } from 'react'
-
+import Flatpickr from 'react-flatpickr'
 // ** Third Party Components
 import { useForm, Controller } from 'react-hook-form'
 import { ArrowLeft, ArrowRight } from 'react-feather'
-import PickerRange from './PickerRange'
+
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 // ** Reactstrap Imports
-import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
+import { Label, Row, Col, Button, Form } from 'reactstrap'
 
 const defaultValues = {
-  city: '',
-  pincode: '',
-  address: '',
-  landmark: ''
+  DateGameM: new Date()
 }
 
-const Address = ({ stepper }) => {
+const Address = ({ stepper, setTercero  }) => {
   // ** Hooks
   const {
-    
-    setError,
-    handleSubmit,
-    formState: {  }
+    control,
+    handleSubmit
   } = useForm({ defaultValues })
-
-  const onSubmit = data => {
-    if (Object.values(data).every(field => field.length > 0)) {
-      stepper.next()
-    } else {
-      for (const key in data) {
-        if (data[key].length === 0) {
-          setError(key, {
-            type: 'manual',
-            message: `Please enter a valid ${key}`
-          })
-        }
-      }
-    }
-  }
-
   return (
     <Fragment>
       <div className='content-header'>
         <h5 className='mb-0'>Tiempo de la Actividad</h5>
         <small></small>
       </div>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit((data) =>  { setTercero(data); stepper.next() })}>
         <Row>
           <Col md='6' className='mb-1'>
-            <Label className='form-label' for='address'>
+            <Label className='form-label' for='DateGameM'>
             Rango de Fecha
             </Label>
-           <PickerRange/>
+
+          <Controller
+            control={control}
+            name='DateGameM'
+            render={({field:{onChange, value, ...rest}}) => <Flatpickr
+        value={value}
+        id='DateGameM'
+        className='form-control'
+        onChange={onChange}
+        options={{
+          mode: 'range',
+          defaultDate: ['2022-11-30', '2022-10-21']
+        }}
+        {...rest}
+      />}
+          />
           </Col>
         
         </Row>

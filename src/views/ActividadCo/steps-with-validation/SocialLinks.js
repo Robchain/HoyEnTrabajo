@@ -6,56 +6,49 @@ import { ArrowLeft } from 'react-feather'
 import { useForm, Controller } from 'react-hook-form'
 
 // ** Reactstrap Imports
-import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
+import { Label, Row, Col, Button, Form } from 'reactstrap'
 
 const defaultValues = {
-  google: '',
-  twitter: '',
-  facebook: '',
-  linkedin: ''
+  primero: '',
+  segundo: '',
+  tercero: ''
 }
 
-const SocialLinks = ({ stepper, primero }) => {
+const SocialLinks = ({ stepper, segundo, tercero, primero }) => {
   // ** Hooks
   const {
-    handleSubmit,
-    formState: {  }
+    handleSubmit
   } = useForm({ defaultValues })
   const onSubmit = data => {
-    if (Object.values(data).every(field => field.length > 0)) {
-      alert('submitted')
-    } else {
-      for (const key in data) {
-        if (data[key].length === 0) {
-          setError(key, {
-            type: 'manual',
-            message: `Please enter a valid ${key} url`
-          })
-        }
-      }
-    }
+    console.log(data)
   }
 
   return (
     <Fragment>
       <div className='content-header'>
         <h5 className='mb-0'>Confirmacion de la Informacion</h5>
-        <small>Resumen de los datos</small>
+        <small>Resumen de la Actividad</small>
       </div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Row>
           <Col md='6' className='mb-1'>
-            <Label className='form-label' for='twitter'>
-            Informacion
-            </Label>
-           
+          <Label>Grupos de trabajo</Label>
+          <p>{primero.grupos.label}</p>
+          <Label>Tarjetas De Actividades</Label>
+          {
+            primero.equipos.map(i => (<p>{i.label}</p>))
+          }            
           </Col>
           <Col md='6' className='mb-1'>
-          {JSON.stringify(primero)}
+          {JSON.stringify(segundo)}
+          {console.log(segundo)}
+          {console.log(segundo.equipo0)}
           </Col>
-        </Row>
-        <Row>
-        
+          <Col md='6' className='mb-1'>
+          <Label>Fecha de la Actividad</Label>
+          <p>{}</p>
+          {JSON.stringify(tercero)}
+          </Col>
         </Row>
         <div className='d-flex justify-content-between'>
           <Button color='primary' className='btn-prev' onClick={() => stepper.previous()}>
