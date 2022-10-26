@@ -1,27 +1,43 @@
 // ** React Imports
 import { Fragment } from 'react'
-
+import { crearMultiJugador } from '../../../API/Team'
 // ** Third Party Components
 import { ArrowLeft } from 'react-feather'
 import { useForm, Controller } from 'react-hook-form'
-
+import Repeater from '@components/repeater'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 // ** Reactstrap Imports
 import { Label, Row, Col, Button, Form } from 'reactstrap'
 
 const defaultValues = {
-  primero: '',
-  segundo: '',
-  tercero: ''
+  primeros: '',
+  segundos: '',
+  terceros: ''
 }
 
 const SocialLinks = ({ stepper, segundo, tercero, primero }) => {
   // ** Hooks
+  const MySwal = withReactContent(Swal)
   const {
     handleSubmit
   } = useForm({ defaultValues })
-  const onSubmit = data => {
-    console.log(data)
+  const onSubmit = ({primeros, segundos, terceros}) => {
+    segundos = segundo
+    terceros = tercero
+    primeros = primero
+    crearMultiJugador(primeros, segundos, terceros).then(respuesta => { 
+      MySwal.fire({
+      title: `${respuesta.titulo}`,
+      text: `${respuesta.respuesta}`,
+      icon: `${respuesta.type}`,
+      customClass: {
+        confirmButton: 'btn btn-primary'
+      },
+      buttonsStyling: false}) 
+    })
   }
+
 
   return (
     <Fragment>
@@ -40,9 +56,17 @@ const SocialLinks = ({ stepper, segundo, tercero, primero }) => {
           }            
           </Col>
           <Col md='6' className='mb-1'>
-          {JSON.stringify(segundo)}
-          {console.log(segundo)}
-          {console.log(segundo.equipo0)}
+         <Label>Jugadores por grupo</Label>
+         <Repeater count={ Number(primero.grupos.value) }>
+         { i => (
+          <Row> <Col md='6' className='mb-1'>
+          <Label> grupo {i + 1}</Label>
+          {
+            segundo[`equipo${i}`].map(i => (<li>{i.label}</li>))
+          } 
+         </Col> </Row>
+         )}
+         </Repeater>
           </Col>
           <Col md='6' className='mb-1'>
           <Label>Fecha de la Actividad</Label>

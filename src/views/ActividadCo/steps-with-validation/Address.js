@@ -32,7 +32,6 @@ const Address = ({ stepper, setTercero  }) => {
             <Label className='form-label' for='DateGameM'>
             Rango de Fecha
             </Label>
-
           <Controller
             control={control}
             name='DateGameM'
@@ -49,10 +48,8 @@ const Address = ({ stepper, setTercero  }) => {
       />}
           />
           </Col>
-        
         </Row>
         <Row>
-          
         </Row>
         <div className='d-flex justify-content-between'>
           <Button type='button' color='primary' className='btn-prev' onClick={() => stepper.previous()}>

@@ -122,7 +122,7 @@ const handlerFalse  = (e) =>  {
 }
 const handlEditar = async ()  =>  {
   
-    await axios({
+  axios({
     url:"http://localhost:3002/api/auth/vocabulario/Editar",
     method:"POST",
     data:selecionado
@@ -137,7 +137,7 @@ const handlEditar = async ()  =>  {
       buttonsStyling: false}) 
     })
    // window.location.reload(false)
-    setFormModal(!formModal) 
+    setFormModal(!formModal)
     dispatch(state  + 1)
 }
 
