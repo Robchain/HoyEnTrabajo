@@ -47,7 +47,7 @@ const [listadoI, setlistadoI] = useState([])
   
 useEffect(() => {
     listadoInicial()
-  }, [randomOn])
+  }, [])
 useEffect(() => {
   setDati({equipo0:[{label: 'Robert', value:'1'}, {label: 'Andres', value:'3'}], equipo1:[{label: 'Allison', value:'4'}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]})
 }, [randomOn])
@@ -57,7 +57,7 @@ useEffect(() => {
   const {
     control,
     handleSubmit   
-  } = useForm()
+  } = useForm(dati)
   return (
     <Fragment>
       <div className='content-header'>
@@ -82,7 +82,7 @@ useEffect(() => {
             <Controller
               name={`equipo${i}`}
               control={control}
-              render={({ field: {  ...rest} }) => <Select
+              render={({ field: { onChange, value, ...rest} }) => <Select
               isMulti
               isClearable={false}
               theme={selectThemeColors}
@@ -94,8 +94,8 @@ useEffect(() => {
                       })}
               className='react-select mb-2'
               classNamePrefix='select'
-              onChange={dati[`equipo${i}`]}
-              defaultValue={dati[`equipo${i}`]}
+              onChange={onChange}
+              defaultValue={value}
               {...rest}
             />
             }
