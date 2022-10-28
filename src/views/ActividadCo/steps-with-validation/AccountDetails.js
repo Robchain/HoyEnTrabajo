@@ -17,7 +17,8 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import { Form, Label, Row, Col, Button, FormFeedback } from 'reactstrap'
 const defaultValues = {
   grupos: '',
-  equipos:[]
+  equipos:[],
+  integrantes:''
 }
 const AccountDetails = ({ stepper, setPrimero}) => {
   const [tarjetas, setTarjetas] = useState([])
@@ -40,6 +41,11 @@ useEffect(() => {
     { value: '3', label: '3' },
     { value: '4', label: '4' },
     { value: '5', label: '5' },
+    { value: '6', label: '6' }
+  ]
+  const Options2 = [
+    { value: '2', label: '2' },
+    { value: '4', label: '4' },
     { value: '6', label: '6' }
   ]
   return (
@@ -95,6 +101,26 @@ useEffect(() => {
             />}
     />
             
+          </Col>
+          <Col md='6' className='mb-1'>
+          <Label className='form-label' for='integrantes'>
+              Numero de Integrantes
+            </Label>
+            <Controller
+            name='integrantes'
+            control={control}
+            render={ ({field: {onChange, value, ...rest} })  => <Select
+              theme={selectThemeColors}
+              isClearable={false}
+              id={`integrantes`}
+              className='react-select'
+              classNamePrefix='select2'
+              options={Options2}
+              onChange={onChange}
+              defaultValue={value}
+              {...rest}
+            />}
+            />
           </Col>
         </Row>
         <div className='d-flex justify-content-between'>

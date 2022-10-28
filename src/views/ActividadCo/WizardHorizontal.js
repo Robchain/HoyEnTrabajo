@@ -16,7 +16,7 @@ import { FileText, User, Calendar, CheckCircle } from 'react-feather'
 const WizardModern = () => {
   // ** Ref
   const ref = useRef(null)
-  const [primero, setPrimero] = useState({grupos:{ value:'', label:'' }, equipos:[]})
+  const [primero, setPrimero] = useState({grupos:{ value:'', label:'' }, equipos:[], integrantes:{value:'', label:''}})
   const [segundo, setSegundo] = useState({equipo0:[], equipo1:[], equipo2:[], equipo3:[], equipo4:[], equipo5:[]})
   const [tercero, setTercero] = useState(new Date())
   // ** State

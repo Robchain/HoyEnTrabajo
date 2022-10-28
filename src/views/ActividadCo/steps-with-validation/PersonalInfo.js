@@ -16,48 +16,44 @@ import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
 import '@styles/react/libs/react-select/_react-select.scss'
 
 
-const PersonalInfo = ({ stepper, setSegundo, primero }) => {
+const PersonalInfo = ({ stepper, /*setSegundo*/ primero }) => {
   // ** Hooks
-const Test = [{label: 'Robert', value:'1'}, {label:'Allison', value:'2'}]
-const  data = {equipo0:[], equipo1:[], equipo2:[], equipo3:[], equipo4:[], equipo5:[]}
+  const [dati, setDati] = useState({equipo0:[{label: 'Robert', value:'1'}, {label: 'Andres', value:'3'}], equipo1:[{label: 'Allison', value:'4'}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]})
+const  data = {equipo0:[{label: 'Robert', value:'1'}, {label: 'Andres', value:'3'}], equipo1:[{label: 'Allison', value:'4'}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]}
 const [randomOn, setRandomOn] = useState(false)
 const [listadoI, setlistadoI] = useState([])
   const listadoInicial =  async () => {
     const data = await ListaAlumnos()
     setlistadoI(data)
   }
-  const formulario = () => {
-  }
-  useEffect(() => {
+  const AleatorioO = () => {
+    let j = 0
+    let  a = 0
+    let b = 0
+    let f
+    listadoI.sort(() => { return Math.random() - 0.5 })
+      for (j = 0; Number(primero.grupos.value) > j; j++)  {        
+          for (f = 0; f < Number(primero.integrantes.value); f++) {
+            data[`equipo${j}`][b] = [{label: listadoI[a].Nombre, value:listadoI[a]._id}]
+            a++
+            b++
+          }
+          b = 0                  
+      }
+  console.log(listadoI)
+    console.log(data[`equipo${0}`])
+    console.log(randomOn)
+  } 
   
-    listadoInicial()
-  }, [])
 useEffect(() => {
-  formulario()
-}, [])
-const AleatorioO = () => {
-  setRandomOn(false)
-  let j = 0
-  let a = 0
-  const  data = {equipo0:[], equipo1:[], equipo2:[], equipo3:[], equipo4:[], equipo5:[]}
-  listadoI.sort(() => { return Math.random() - 0.5 })
-  while (Number(primero.grupos.value) >= j) {
-    console.log(`${j}`)
-    while (100 >= a) {
-      data[`equipo${j}`]  = [{label: listadoI[a].Nombre, value:listadoI[a]._id}]
-      console.log(`${a}`)
-      console.log(typeof data[`equipo${j}`]) 
-      a += 20
-    }
-    
-   
-    j++
-    a = j + 1
-  }
-  console.log(data)
-  setRandomOn(true)
-} 
-
+    listadoInicial()
+  }, [randomOn])
+useEffect(() => {
+  setDati({equipo0:[{label: 'Robert', value:'1'}, {label: 'Andres', value:'3'}], equipo1:[{label: 'Allison', value:'4'}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]})
+}, [randomOn])
+useEffect(() => {
+  AleatorioO()
+}, [randomOn])
   const {
     control,
     handleSubmit   
@@ -68,11 +64,11 @@ const AleatorioO = () => {
         <h5 className='mb-0'>Seleccion de los participantes</h5>
         <small>Especifique los integrantes de los grupos </small>
       </div>
-      <Button type='button' color='primary' className='btn-prev mb-1' onClick={AleatorioO}>
+      <Button type='button' color='primary' className='btn-prev mb-1' onClick={ () => setRandomOn(!randomOn)}>
             <Filter size={14} className='align-middle me-sm-25 me-0'/>
             <span className='align-middle d-sm-inline-block d-none'>Aleatorio</span>
           </Button>
-      <Form onSubmit={handleSubmit((data) => { setSegundo(data); stepper.next() })}>
+      <Form onSubmit={handleSubmit((data) => { console.log(data); stepper.next() })}>
         <Repeater count={ Number(primero.grupos.value)}>
         {i => (
           <Row><Col md='6' className='mb-1'>
@@ -86,7 +82,7 @@ const AleatorioO = () => {
             <Controller
               name={`equipo${i}`}
               control={control}
-              render={({ field: {onChange, value, ...rest} }) => <Select
+              render={({ field: {  ...rest} }) => <Select
               isMulti
               isClearable={false}
               theme={selectThemeColors}
@@ -98,10 +94,11 @@ const AleatorioO = () => {
                       })}
               className='react-select mb-2'
               classNamePrefix='select'
-              onChange={onChange}
-              defaultValue={randomOn === true ? data[`equipo${i}`] : value}
+              onChange={dati[`equipo${i}`]}
+              defaultValue={dati[`equipo${i}`]}
               {...rest}
-            />}
+            />
+            }
             />
           </Row>
         )}
