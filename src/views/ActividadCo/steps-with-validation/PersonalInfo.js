@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState, useEffect, useRef } from 'react'
 
 // ** Third Party Components
 import Select from 'react-select'
@@ -18,16 +18,17 @@ import '@styles/react/libs/react-select/_react-select.scss'
 
 const PersonalInfo = ({ stepper, /*setSegundo*/ primero }) => {
   // ** Hooks
+  const reftest = useRef()
 const  data = {equipo0:[{label: '', value:''}], equipo1:[{label: '', value:''}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]}
 const [randomOn, setRandomOn] = useState(false)
+//const [base, setBase] = useState({equipo0:[{label: '', value:''}], equipo1:[{label: '', value:''}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]})
 const [listadoI, setlistadoI] = useState([])
-const [first, setFirst] = useState(data)
+const [first, setFirst] = useState([data])
   const listadoInicial =  async () => {
     const data = await ListaAlumnos()
     setlistadoI(data)
   }
-  
-
+ 
   const AleatorioO = () => {
     let j = 0
     let  a = 0
@@ -43,8 +44,8 @@ const [first, setFirst] = useState(data)
           b = 0                  
       }
       setFirst(data)
+      console.log(first)
     console.log(randomOn)
-    console.log(first)
   } 
   
 useEffect(() => {
@@ -55,9 +56,53 @@ useEffect(() => {
   console.log('dada')
 }, [randomOn])
   const {
-    control,
+    control, 
     handleSubmit   
-  } = useForm({defaultValues:{first}})
+  } = useForm()
+  const selects = (i)  => {
+      if (first[`equipo${i}`].length > 0 && randomOn === true) {
+        return (
+          <Row>
+          <Col md='6' className='mb-1'>
+            <Label className='form-label' for='firstName'>
+             Grupo {i + 1}
+            </Label>
+          </Col>
+            <Label className='form-label' for={`equipo${i}`}  >
+             Listado Estudiantes
+            </Label>
+            <Controller
+            name={`equipo${i}`}
+            control={control}
+            render={ ({field: {onChange, value, ...rest} })  => <Select
+            placeholder='seleccione '
+              isMulti
+              isClearable={false}
+              theme={selectThemeColors}
+              id={`equipos`}
+              className='react-select'
+              classNamePrefix='select'
+              defaultValue={first[`equipo${i}`].map(i => { 
+      return {
+              label:`${i.label}`,
+              value: i.value }
+            })}
+              options={listadoI.map(i => {
+                return {
+                        label:`${i.Nombre} ${i.Apellido}`,
+                        value: i._id }
+                      })}
+              onChange={onChange}
+                      ref={reftest}
+            value={value}
+              {...rest}
+            />}
+    />
+    </Row>
+        )
+      }
+  }
+  
   return (
     <Fragment>
       <div className='content-header'>
@@ -70,59 +115,7 @@ useEffect(() => {
           </Button>
       <Form onSubmit={handleSubmit((data) => { console.log(data); stepper.next() })}>
         <Repeater count={ Number(primero.grupos.value)}>
-        {i => (
-          <Row><Col md='6' className='mb-1'>
-            <Label className='form-label' for='firstName'>
-             Grupo {i + 1}
-            </Label>
-          </Col>
-            <Label className='form-label' for={`equipo${i}`}  >
-             Listado Estudiantes
-            </Label>
-            <Controller
-            name={`equipo${i}`}
-            control={control}
-            render={ ({field: {onChange, value, ...rest} })  => <Select
-              isMulti
-              isClearable={false}
-              theme={selectThemeColors}
-              id={`equipo${i}`}
-              className='react-select'
-              classNamePrefix='select'
-              options={listadoI.map(i => { 
-                return {
-                        label:`${i.Nombre} ${i.Apellido}`,
-                        value: i._id }
-                      })}
-              onChange={onChange}
-              value={value[`equipo${i}`].map(i => { 
-      return {
-              label:`${i.label}`,
-              value: i.value }
-            })}
-              {...rest}
-            />}
-    />
-            {/*<Select
-              isMulti
-              isClearable={false}
-              theme={selectThemeColors}
-              id={`equipo${i}`}
-              options={listadoI.map(i => { 
-                return {
-                        label:`${i.Nombre} ${i.Apellido}`,
-                        value: i._id }
-                      })}
-              className='react-select mb-2'
-              classNamePrefix='select'
-              value={first[`equipo${i}`].map(i => { 
-      return {
-              label:`${i.label}`,
-              value: i.value }
-            })}
-            />*/}
-          </Row>
-        )}
+        {i => (selects(i))}
       </Repeater>
         <div className='d-flex justify-content-between '>
           <Button type='button' color='primary' className='btn-prev' onClick={() => stepper.previous()}>

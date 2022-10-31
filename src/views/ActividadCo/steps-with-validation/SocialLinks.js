@@ -61,8 +61,7 @@ const SocialLinks = ({ stepper, segundo, tercero, primero }) => {
          { i => (
           <Row> <Col md='6' className='mb-1'>
           <Label> grupo {i + 1}</Label>
-          {
-            segundo[`equipo${i}`].map(i => (<li>{i.label}</li>))
+            {segundo[`equipo${i}`].map(i => (<li>{i.label}</li>))
           } 
          </Col> </Row>
          )}
