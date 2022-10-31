@@ -18,14 +18,16 @@ import '@styles/react/libs/react-select/_react-select.scss'
 
 const PersonalInfo = ({ stepper, /*setSegundo*/ primero }) => {
   // ** Hooks
-  const [dati, setDati] = useState({equipo0:[{label: 'Robert', value:'1'}, {label: 'Andres', value:'3'}], equipo1:[{label: 'Allison', value:'4'}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]})
-const  data = {equipo0:[{label: 'Robert', value:'1'}, {label: 'Andres', value:'3'}], equipo1:[{label: 'Allison', value:'4'}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]}
+const  data = {equipo0:[{label: '', value:''}], equipo1:[{label: '', value:''}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]}
 const [randomOn, setRandomOn] = useState(false)
 const [listadoI, setlistadoI] = useState([])
+const [first, setFirst] = useState(data)
   const listadoInicial =  async () => {
     const data = await ListaAlumnos()
     setlistadoI(data)
   }
+  
+
   const AleatorioO = () => {
     let j = 0
     let  a = 0
@@ -34,30 +36,28 @@ const [listadoI, setlistadoI] = useState([])
     listadoI.sort(() => { return Math.random() - 0.5 })
       for (j = 0; Number(primero.grupos.value) > j; j++)  {        
           for (f = 0; f < Number(primero.integrantes.value); f++) {
-            data[`equipo${j}`][b] = [{label: listadoI[a].Nombre, value:listadoI[a]._id}]
+            data[`equipo${j}`][b] = {label:`${listadoI[a].Nombre} ${listadoI[a].Apellido}`, value:listadoI[a]._id}
             a++
             b++
           }
           b = 0                  
       }
-  console.log(listadoI)
-    console.log(data[`equipo${0}`])
+      setFirst(data)
     console.log(randomOn)
+    console.log(first)
   } 
   
 useEffect(() => {
     listadoInicial()
   }, [])
 useEffect(() => {
-  setDati({equipo0:[{label: 'Robert', value:'1'}, {label: 'Andres', value:'3'}], equipo1:[{label: 'Allison', value:'4'}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]})
-}, [randomOn])
-useEffect(() => {
   AleatorioO()
+  console.log('dada')
 }, [randomOn])
   const {
     control,
     handleSubmit   
-  } = useForm(dati)
+  } = useForm({defaultValues:{first}})
   return (
     <Fragment>
       <div className='content-header'>
@@ -80,9 +80,30 @@ useEffect(() => {
              Listado Estudiantes
             </Label>
             <Controller
-              name={`equipo${i}`}
-              control={control}
-              render={({ field: { onChange, value, ...rest} }) => <Select
+            name={`equipo${i}`}
+            control={control}
+            render={ ({field: {onChange, value, ...rest} })  => <Select
+              isMulti
+              isClearable={false}
+              theme={selectThemeColors}
+              id={`equipo${i}`}
+              className='react-select'
+              classNamePrefix='select'
+              options={listadoI.map(i => { 
+                return {
+                        label:`${i.Nombre} ${i.Apellido}`,
+                        value: i._id }
+                      })}
+              onChange={onChange}
+              value={value[`equipo${i}`].map(i => { 
+      return {
+              label:`${i.label}`,
+              value: i.value }
+            })}
+              {...rest}
+            />}
+    />
+            {/*<Select
               isMulti
               isClearable={false}
               theme={selectThemeColors}
@@ -94,12 +115,12 @@ useEffect(() => {
                       })}
               className='react-select mb-2'
               classNamePrefix='select'
-              onChange={onChange}
-              defaultValue={value}
-              {...rest}
-            />
-            }
-            />
+              value={first[`equipo${i}`].map(i => { 
+      return {
+              label:`${i.label}`,
+              value: i.value }
+            })}
+            />*/}
           </Row>
         )}
       </Repeater>
