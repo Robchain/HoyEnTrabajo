@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState, useEffect, useRef } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 
 // ** Third Party Components
 import Select from 'react-select'
@@ -16,51 +16,50 @@ import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
 import '@styles/react/libs/react-select/_react-select.scss'
 
 
-const PersonalInfo = ({ stepper, /*setSegundo*/ primero }) => {
+const PersonalInfo = ({ stepper, setSegundo, primero }) => {
   // ** Hooks
-  const reftest = useRef()
-const  data = {equipo0:[{label: '', value:''}], equipo1:[{label: '', value:''}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]}
+  
+const  dato = {equipo0:[{label: 'a', value:'a'}], equipo1:[{label: '', value:''}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]}
 const [randomOn, setRandomOn] = useState(false)
-//const [base, setBase] = useState({equipo0:[{label: '', value:''}], equipo1:[{label: '', value:''}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]})
 const [listadoI, setlistadoI] = useState([])
-const [first, setFirst] = useState([data])
+const [first, setFirst] = useState([dato])
   const listadoInicial =  async () => {
     const data = await ListaAlumnos()
     setlistadoI(data)
   }
- 
   const AleatorioO = () => {
     let j = 0
     let  a = 0
     let b = 0
     let f
+    setFirst(dato)
     listadoI.sort(() => { return Math.random() - 0.5 })
       for (j = 0; Number(primero.grupos.value) > j; j++)  {        
           for (f = 0; f < Number(primero.integrantes.value); f++) {
-            data[`equipo${j}`][b] = {label:`${listadoI[a].Nombre} ${listadoI[a].Apellido}`, value:listadoI[a]._id}
+            dato[`equipo${j}`][b] = {label:`${listadoI[a].Nombre} ${listadoI[a].Apellido}`, value:listadoI[a]._id}
             a++
             b++
           }
-          b = 0                  
+          b = 0
       }
-      setFirst(data)
+      console.log(dato)
       console.log(first)
     console.log(randomOn)
-  } 
-  
+  }
 useEffect(() => {
     listadoInicial()
+   
   }, [])
 useEffect(() => {
-  AleatorioO()
-  console.log('dada')
+    AleatorioO()
 }, [randomOn])
   const {
     control, 
     handleSubmit   
   } = useForm()
   const selects = (i)  => {
-      if (first[`equipo${i}`].length > 0 && randomOn === true) {
+   
+      if (dato[`equipo${i}`].length > 0 && randomOn === true) {
         return (
           <Row>
           <Col md='6' className='mb-1'>
@@ -70,30 +69,31 @@ useEffect(() => {
           </Col>
             <Label className='form-label' for={`equipo${i}`}  >
              Listado Estudiantes
-            </Label>
-            <Controller
-            name={`equipo${i}`}
-            control={control}
-            render={ ({field: {onChange, value, ...rest} })  => <Select
-            placeholder='seleccione '
+              </Label>
+              <Controller
+              name={`equipo${i}`}
+              control={control}
+              render={ ({field: {onChange, value, ...rest} })  => <Select
+              placeholder='seleccione'
               isMulti
               isClearable={false}
               theme={selectThemeColors}
               id={`equipos`}
               className='react-select'
               classNamePrefix='select'
-              defaultValue={first[`equipo${i}`].map(i => { 
-      return {
+              defaultValue={[
+                dato[`equipo${i}`].map(i => { 
+              return {
               label:`${i.label}`,
               value: i.value }
-            })}
+            })
+            ]}
               options={listadoI.map(i => {
                 return {
                         label:`${i.Nombre} ${i.Apellido}`,
                         value: i._id }
                       })}
               onChange={onChange}
-                      ref={reftest}
             value={value}
               {...rest}
             />}
@@ -102,7 +102,13 @@ useEffect(() => {
         )
       }
   }
-  
+  const manejoData = (data) => {
+    if (data.equipo0 === undefined) {
+     setSegundo(dato)
+    } else {
+      setSegundo(data) 
+    }
+  }
   return (
     <Fragment>
       <div className='content-header'>
@@ -113,11 +119,11 @@ useEffect(() => {
             <Filter size={14} className='align-middle me-sm-25 me-0'/>
             <span className='align-middle d-sm-inline-block d-none'>Aleatorio</span>
           </Button>
-      <Form onSubmit={handleSubmit((data) => { console.log(data); stepper.next() })}>
+      <Form onSubmit={handleSubmit((data) => {  manejoData(data); stepper.next() })}>
         <Repeater count={ Number(primero.grupos.value)}>
         {i => (selects(i))}
       </Repeater>
-        <div className='d-flex justify-content-between '>
+        <div className='d-flex justify-content-between mt-1'>
           <Button type='button' color='primary' className='btn-prev' onClick={() => stepper.previous()}>
             <ArrowLeft size={14} className='align-middle me-sm-25 me-0'></ArrowLeft>
             <span className='align-middle d-sm-inline-block d-none'>Previous</span>
