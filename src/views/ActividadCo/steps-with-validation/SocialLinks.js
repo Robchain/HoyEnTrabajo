@@ -19,6 +19,7 @@ const defaultValues = {
 const SocialLinks = ({ stepper, segundo, tercero, primero }) => {
   // ** Hooks
   const MySwal = withReactContent(Swal)
+
   const {
     handleSubmit
   } = useForm({ defaultValues })
@@ -37,8 +38,6 @@ const SocialLinks = ({ stepper, segundo, tercero, primero }) => {
       buttonsStyling: false}) 
     })
   }
-
-
   return (
     <Fragment>
       <div className='content-header'>
@@ -69,7 +68,7 @@ const SocialLinks = ({ stepper, segundo, tercero, primero }) => {
           </Col>
           <Col md='6' className='mb-1'>
           <Label>Fecha de la Actividad</Label>
-          <p>{}</p>
+   
           {JSON.stringify(tercero)}
           </Col>
         </Row>
