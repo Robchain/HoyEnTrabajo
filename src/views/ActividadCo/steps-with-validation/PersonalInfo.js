@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment} from 'react'
+import { Fragment, useState} from 'react'
 
 // ** Third Party Components
 import Select from 'react-select'
@@ -8,10 +8,9 @@ import { ArrowLeft, ArrowRight, Filter } from 'react-feather'
 import { SelectRamdon } from '../../../Components/SelectRamdon'
 import { SelectNoRamdon } from '../../../Components/SelectNoRamdon'
 // ** Utils
-
+import { useRamdon } from '../../../utility/hooks/useRamdon'
 import Repeater from '@components/repeater'
 import { useListado } from '../../../utility/hooks/useListado'
-import { useRamdon } from '../../../utility/hooks/useRamdon'
 import { selectThemeColors } from '@utils'
 // ** Reactstrap Imports
 import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
@@ -19,10 +18,12 @@ import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 
+
 const PersonalInfo = ({ stepper, setSegundo, primero }) => {
   // ** Hooks
   const {listadoI} = useListado()
-  const {AleatorioO} = useRamdon(listadoI, primero) 
+  const [random, setrandom] = useState(false)
+  const {AleatorioO, first} = useRamdon(listadoI, primero, random) 
 
   const {
     control,
@@ -43,11 +44,11 @@ const PersonalInfo = ({ stepper, setSegundo, primero }) => {
         <h5 className='mb-0'>Seleccion de los participantes</h5>
         <small>Especifique los integrantes de los grupos </small>
       </div>
-      <Button type='button' color='primary' className='btn-prev mb-1' onClick={ () => AleatorioO()}>
+      <Button type='button' color='primary' className='btn-prev mb-1' onClick={ () => { AleatorioO(); setrandom(true) }}>
             <Filter size={14} className='align-middle me-sm-25 me-0'/>
             <span className='align-middle d-sm-inline-block d-none'>Aleatorio</span>
           </Button>
-      <Form onSubmit={handleSubmit((data) => {  manejoData(data); stepper.next() })}>
+          { random ? <SelectRamdon  primero={primero} listadoI={listadoI} setSegundo={setSegundo} stepper={stepper} first={first}/> :  (<Form onSubmit={handleSubmit((data) => {  manejoData(data); stepper.next() })}>
         <Repeater count={ Number(primero.grupos.value)}>
         {i =>  (<Row>
           <Col md='6' className='mb-1'>
@@ -58,7 +59,6 @@ const PersonalInfo = ({ stepper, setSegundo, primero }) => {
             <Label className='form-label' for={`equipo${i}`}  >
              Listado Estudiantes
               </Label>
-              
               <Controller
               name={`equipo${i}`}
               control={control}
@@ -77,9 +77,9 @@ const PersonalInfo = ({ stepper, setSegundo, primero }) => {
                       })}
               onChange={onChange}
             value={value}
-              {...rest}
+            {...rest}
             />
-            } 
+            }
     />
     </Row>)  
         }
@@ -87,14 +87,16 @@ const PersonalInfo = ({ stepper, setSegundo, primero }) => {
         <div className='d-flex justify-content-between mt-1'>
           <Button type='button' color='primary' className='btn-prev' onClick={() => stepper.previous()}>
             <ArrowLeft size={14} className='align-middle me-sm-25 me-0'></ArrowLeft>
-            <span className='align-middle d-sm-inline-block d-none'>Previous</span>
+            <span className='align-middle d-sm-inline-block d-none'>Anterior</span>
           </Button>
           <Button type='submit' color='primary' className='btn-next'>
-            <span className='align-middle d-sm-inline-block d-none'>Next</span>
+            <span className='align-middle d-sm-inline-block d-none'>Siguiente</span>
             <ArrowRight size={14} className='align-middle ms-sm-25 ms-0'></ArrowRight>
           </Button>
         </div>
-      </Form>
+      </Form>)
+          }
+      
     </Fragment>
   )
 }
