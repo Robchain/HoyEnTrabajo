@@ -1,11 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export const useRamdon = (listadoI = {}, primero = {integrantes:{undefined}}) => {
+
+export const useRamdon = (listadoI = {}, primero = {integrantes:{undefined}}, value = false) => {
     
-    const  dato = {equipo0:[{label: '', value:''}], equipo1:[{label: '', value:''}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]}
+const [first, setFirst] = useState()
 
-const [first, setFirst] = useState(dato)
     const AleatorioO = () => {
+      const  dato = {equipo0:[{label: '', value:''}], equipo1:[{label: '', value:''}], equipo2:[{label: '', value:''}], equipo3:[{label: '', value:''}], equipo4:[{label: '', value:''}], equipo5:[{label: '', value:''}]}
         let j = 0
         let  a = 0
         let b = 0
@@ -19,8 +20,13 @@ const [first, setFirst] = useState(dato)
               }
               b = 0
           }
-          setFirst(dato)
+          return dato
       }
+      
+      useEffect(() => {
+        setFirst(AleatorioO())
+      }, [value])
+      
 
   return {
     first,
