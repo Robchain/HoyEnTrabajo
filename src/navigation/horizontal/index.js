@@ -1,16 +1,59 @@
-import { Mail, Home } from "react-feather"
+import { User,  Columns,  Users, Image, Circle,  Grid,  Layers, Clipboard} from "react-feather"
 
 export default [
   {
-    id: "home",
-    title: "Home",
-    icon: <Home size={20} />,
-    navLink: "/home"
+    id: "Estudiante",
+    title: "Estudiante",
+    icon: <User size={20}/>,
+    navLink: "/Estudiante"
   },
   {
-    id: "secondPage",
-    title: "Second Page",
-    icon: <Mail size={20} />,
-    navLink: "/second-page"
+    id: "Categoria",
+    title: "Categoria",
+    icon: <Grid  size={20}/>,
+    navLink: "/Categoria"
+  },
+  {
+    id:"Rompecabeza",
+    title:"Rompecabeza",
+    icon:<Image size={20}/>,
+    navLink:"/Rompecabeza"
+  },
+  {
+    id:"Vocabulario",
+    title:"Vocabulario",
+    icon:<Circle  size={20}/>,
+    navLink:"/Vocabulario"
+  },
+  {
+    id:"Oracion",
+    title:"Oracion",
+    icon:<Columns size={20}/>,
+    navLink:"/Oracion"
+  },
+  {
+    id:"Equipo",
+    title:"Equipo",
+    icon: <Users  size={20}/>,
+    navLink:"/Equipo"
+  },
+  {
+    id:"ActividadGrupal",
+    title:"Actividades",
+    icon:<Layers  size={20}/>,
+    navLink:"/ActividadGrupal"
+  },
+  {
+    id:"ReporteEstudiante",
+    title:"Reportes",
+    icon: <Clipboard  size={20} />,
+    navLink:"/ReporteEstudiante"
   }
+  /*{
+    id:"Test",
+    title:"test",
+    icon: <Clipboard  size={20} />,
+    navLink:"/VocabularioJ"
+    
+  }*/
 ]

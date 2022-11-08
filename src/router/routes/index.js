@@ -38,7 +38,7 @@ const ActividadCo = lazy(() =>  import('../../views/ActividadCo/ActividadCo'))
 const Equipo = lazy(()  =>  import('../../views/Equipo'))
 const VocabularioJ  = lazy(() =>  import('../../views/Juego/Vocabulario/VocabularioJ'))
 const MenuJ = lazy(() =>  import('../../views/Juego/MenuJ'))
-
+const VocabualarioRompecabezas = lazy(() =>  import('../../views/Juego/Vocabulario/VocabularioRompecabezas'))
 // ** Merge Routes
 const Routes = [
   {
@@ -117,6 +117,13 @@ const Routes = [
   {
     path:"/MenuJ",
     element:<MenuJ/>,
+    meta:{
+      layout:"blank"
+    }
+  },
+  {
+    path:"/VocabualarioRompecabezas",
+    element:<VocabualarioRompecabezas/>,
     meta:{
       layout:"blank"
     }
