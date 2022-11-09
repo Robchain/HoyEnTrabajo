@@ -21,7 +21,7 @@ import {
 } from "reactstrap"
 
 // ** Default Avatar Image
-import defaultAvatar from "@src/assets/images/portrait/small/avatar-s-11.jpg"
+import No from '../../../../assets/images/NO.jpg'
 
 const UserDropdown = () => {
   
@@ -45,11 +45,11 @@ const UserDropdown = () => {
         onClick={(e) => e.preventDefault()}
       >
         <div className="user-nav d-sm-flex d-none">
-          <span className="user-name fw-bold">John Doe</span>
-          <span className="user-status">Admin</span>
+          <span className="user-name fw-bold">Profesor</span>
+          <span className="user-status">Profesor</span>
         </div>
         <Avatar
-          img={defaultAvatar}
+          img={No}
           imgHeight="40"
           imgWidth="40"
           status="online"

@@ -5,6 +5,11 @@ const VocabularioRompecabezas = () => {
     <>
 
     <RompecabezaIndividualColor/>
+    <RompecabezaIndividualColor/>
+    <RompecabezaIndividualColor/>
+    <RompecabezaIndividualColor/>
+    <RompecabezaIndividualColor/>
+    <RompecabezaIndividualColor/>
     
     </>
   )
