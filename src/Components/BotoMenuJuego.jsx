@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Bloque9 from '../assets/images/AssetsGame/Bloque9.png'
+import Bloque9 from '../assets/images/AssetsGame/Trofeo.png'
 import { Button } from 'reactstrap'
-export const BotoMenuJuego = ({Nombre}) => {
+export const BotoMenuJuego = () => {
   return (
     <>
-<input type="image" src={Bloque9}/> 
-{Nombre}
+    <input type="image" src={Bloque9} width='250'  style={{display:'inline-block', margin:'auto'}}></input>
     </>
   )
 }

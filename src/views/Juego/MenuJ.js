@@ -1,29 +1,31 @@
 import { Button, Row, Col, Container } from "reactstrap"
 import { Link } from "react-router-dom"
 import NO from  '../../assets/images/NO.jpg'/*'../../assets/images/NO.jpg'*/
+import Vocabulario from '../../assets/images/AssetsGame/Vocabulario.png'
+import Carrera from '../../assets/images/AssetsGame/Carrera.png'
+import Oracion from '../../assets/images/AssetsGame/Oraciones.png'
 import { BotoMenuJuego } from "../../Components/BotoMenuJuego"
 const ActividadCo = () => {
     return (
       <Container>
       <Row>
-      <Col  >
-
-        <Button size="lg" block   color="primary" className="botonJuegoM" tag={Link} to="/VocabualarioRompecabezas" outline style={{margin:10}}>Vocabulario<img width={100} src={NO} alt="tres"/></Button>
+      <Col  lg='12' sm='12' xl='12' className="md-auto">
+      <input type="image" src={Vocabulario} width='250' ></input>
         </Col>
         </Row>
         <Row>
-        <Col    >
-        <Button size="lg"   block color="success"  outline className=" botonJuegoM" style={{margin:10}}>Oracion<img width={100} src={NO} alt="tres"/></Button>
+        <Col  lg='12' sm='12' xl='12' className="md-auto">
+        <input type="image" src={Oracion} width='250'></input>
         </Col>
         </Row>
         <Row>
-        <Col    >
-        <Button size="lg"    block color="secondary" outline  className="botonJuegoM"  style={{margin:10}}>Carrera<img width={100} src={NO} alt="tres"/></Button>
+        <Col  >
+        <input type="image" src={Carrera} width='250'></input>
         </Col>
         </Row>
         <Row>
-        <Col>
-        <BotoMenuJuego  Nombre={'Trofeo'}/>
+        <Col >
+        <BotoMenuJuego/>
         </Col>
         </Row>
         
