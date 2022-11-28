@@ -16,7 +16,7 @@ const [{FileMuestra}, setVideo] = useState({})
     <Container>
    <Row>
     <Col  >
-      <ReactPlayer url={FileMuestra}  playing loop/>
+      <ReactPlayer url={FileMuestra}  playing controls/>
     </Col>
    </Row>
    </Container>

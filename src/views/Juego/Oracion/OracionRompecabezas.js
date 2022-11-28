@@ -4,14 +4,14 @@ import { RompecabaSolitaria } from "../../../Components/RompecabaSolitaria"
 import RompecabezaIndividualColor from "../../../Components/RompecabezaIndividualColor"
 
 
-const VocabularioRompecabezas = () => {
+const OracionRompecabezas = () => {
   //visible
   return (
     <div className="fondoMC img-fluid vh-100">
     <Container>
     <Row>
-    <Col  className="d-flex justify-content-evenly" lg='12'>
-      <h1 style={{color:'#000', fontWeight:'bold' }}>VOCABULARIO</h1>
+    <Col  className="d-flex justify-content-evenly">
+      <h1 style={{color:'#000', fontWeight:'bold' }}>ORACION</h1>
     </Col>
     <Col  className="d-flex justify-content-evenly  mt-2 mb-5">
     <RompecabaSolitaria a={'hidden'} d={'hidden'}  /> 
@@ -23,7 +23,7 @@ const VocabularioRompecabezas = () => {
     <RompecabaSolitaria d={'hidden'}/>
     <RompecabaSolitaria a={'hidden'} d={'hidden'}/>
     </Col>
-    <Col lg='12'>
+    <Col>
     <BackButton/>
     </Col>
     </Row>
@@ -32,4 +32,4 @@ const VocabularioRompecabezas = () => {
   )
 }
 
-export default VocabularioRompecabezas
+export default OracionRompecabezas
