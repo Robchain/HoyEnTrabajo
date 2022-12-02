@@ -40,6 +40,7 @@ const VocabularioJ  = lazy(() =>  import('../../views/Juego/Vocabulario/Vocabula
 const MenuJ = lazy(() =>  import('../../views/Juego/MenuJ'))
 const OracionRompecabezas = lazy(() => import('../../views/Juego/Oracion/OracionRompecabezas'))
 const VocabualarioRompecabezas = lazy(() =>  import('../../views/Juego/Vocabulario/VocabularioRompecabezas'))
+const VocabularioPartida = lazy(() => import("../../views/Juego/Vocabulario/VocabularioPartida"))
 // ** Merge Routes
 const Routes = [
   {
@@ -132,6 +133,13 @@ const Routes = [
   {
     path:"/OracionRompecabezas",
     element:<OracionRompecabezas/>,
+    meta:{
+      layout:"blank"
+    }
+  },
+  {
+    path:"/VocabularioPartida",
+    element:<VocabularioPartida />,
     meta:{
       layout:"blank"
     }

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 import { Col, Container, Row } from "reactstrap"
 import { BackButton } from "../../../Components/BackButton"
 import { RompecabaSolitaria } from "../../../Components/RompecabaSolitaria"
@@ -14,14 +15,16 @@ const VocabularioRompecabezas = () => {
       <h1 style={{color:'#000', fontWeight:'bold' }}>VOCABULARIO</h1>
     </Col>
     <Col  className="d-flex justify-content-evenly  mt-2 mb-5">
-    <RompecabaSolitaria a={'hidden'} d={'hidden'}  /> 
-    <RompecabaSolitaria/>
-    <RompecabaSolitaria/>
+    <NavLink  to={'/VocabularioJ'}>
+    <RompecabaSolitaria a={'hidden'} d={'hidden'}  /> </NavLink>
+    <NavLink  to={'/VocabularioJ'}> <RompecabaSolitaria/></NavLink>
+
+    <NavLink  to={'/VocabularioJ'}>     <RompecabaSolitaria/> </NavLink>
     </Col>
     <Col  className="d-flex justify-content-evenly mt-2">
-    <RompecabaSolitaria a={'hidden'} c={'hidden'}/>
-    <RompecabaSolitaria d={'hidden'}/>
-    <RompecabaSolitaria a={'hidden'} d={'hidden'}/>
+    <NavLink  to={'/VocabularioJ'}>    <RompecabaSolitaria a={'hidden'} c={'hidden'}/></NavLink>
+    <NavLink  to={'/VocabularioJ'}>   <RompecabaSolitaria d={'hidden'}/></NavLink>
+    <NavLink  to={'/VocabularioJ'}>   <RompecabaSolitaria a={'hidden'} d={'hidden'}/></NavLink>
     </Col>
     <Col lg='12'>
     <BackButton/>
